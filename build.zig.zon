@@ -1,0 +1,10 @@
+.{
+    .name = "antiphony",
+    .version = "0.0.12",
+    .dependencies = .{
+        .s2s = .{
+            .url = "https://github.com/ziglibs/s2s/archive/6484f786b1830115601cd9ffb51bccec551ac6be.tar.gz",
+            .hash = "12201231231231123456789012345678901234567890132345678901230234123123",
+        },
+    },
+}

@@ -6,6 +6,9 @@ pub fn build(b: *std.build.Builder) void {
     const mode = b.standardOptimizeOption(.{});
     const target = b.standardTargetOptions(.{});
 
+    const serial = b.dependency("s2s", .{});
+    const s2s = serial.module("s2s");
+
     const linux_example = b.addExecutable(.{
         .name = "socketpair-example",
         .root_source_file = .{
@@ -16,28 +19,20 @@ pub fn build(b: *std.build.Builder) void {
     });
     linux_example.addAnonymousModule("antiphony", .{
         .source_file = .{ .path = "src/antiphony.zig" },
-        .dependencies = &.{
-            .{
-                .name = "s2s",
-                .module = b.addModule("s2s", .{
-                    .source_file = .{ .path = "vendor/s2s/s2s.zig" },
-                }),
-            }
-        },
+        .dependencies = &.{.{
+            .name = "s2s",
+            .module = s2s,
+        }},
     });
-    linux_example.install();
+    b.installArtifact(linux_example);
 
     const main_tests = b.addTest(.{
         .name = "antiphony",
-        .root_source_file = .{
-            .path = "src/antiphony.zig"
-        },
+        .root_source_file = .{ .path = "src/antiphony.zig" },
         .target = target,
         .optimize = mode,
     });
-    main_tests.addAnonymousModule("s2s", .{
-        .source_file = .{ .path = "vendor/s2s/s2s.zig" },
-    });
+    main_tests.addModule("s2s", s2s);
 
     const test_step = b.step("test", "Run library tests");
     test_step.dependOn(&main_tests.step);
