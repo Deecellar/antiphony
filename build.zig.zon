@@ -3,7 +3,7 @@
     .version = "0.0.12",
     .dependencies = .{
         .s2s = .{
-            .url = "https://github.com/ziglibs/s2s/archive/6484f786b1830115601cd9ffb51bccec551ac6be.tar.gz",
+            .url = "https://github.com/Deecellar/s2s/archive/148de463b56a2084ffdbd0da7bf1a204ef173554.tar.gz",
             .hash = "12201231231231123456789012345678901234567890132345678901230234123123",
         },
     },
