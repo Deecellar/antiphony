@@ -17,13 +17,15 @@ pub fn build(b: *std.build.Builder) void {
         .optimize = mode,
         .target = target,
     });
-    linux_example.addAnonymousModule("antiphony", .{
+    const antiphony_module = b.addModule("antiphony", .{
         .source_file = .{ .path = "src/antiphony.zig" },
         .dependencies = &.{.{
             .name = "s2s",
             .module = s2s,
         }},
     });
+
+    linux_example.addModule("antiphony", antiphony_module);
     b.installArtifact(linux_example);
 
     const main_tests = b.addTest(.{
