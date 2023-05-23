@@ -4,7 +4,7 @@
     .dependencies = .{
         .s2s = .{
             .url = "https://github.com/Deecellar/s2s/archive/148de463b56a2084ffdbd0da7bf1a204ef173554.tar.gz",
-            .hash = "12201231231231123456789012345678901234567890132345678901230234123123",
+            .hash = "12200076b98259585dae7d38543e4f0fa93d6440073ead3dc15a0cbf84c9b2c515bc",
         },
     },
 }
