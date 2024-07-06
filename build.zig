@@ -6,7 +6,7 @@ pub fn build(b: *std.Build) void {
     const mode = b.standardOptimizeOption(.{});
     const target = b.standardTargetOptions(.{});
     const local_module = b.addModule("antiphony", .{
-        .root_source_file = .{ .path = "src/antiphony.zig" },
+        .root_source_file =  b.path("src/antiphony.zig") ,
     });
     const s2s_dep = b.dependency("s2s", .{});
     const s2s_mod = s2s_dep.module("s2s");
@@ -14,9 +14,7 @@ pub fn build(b: *std.Build) void {
 
     const linux_example = b.addExecutable(.{
         .name = "socketpair-example",
-        .root_source_file = .{
-            .path = "examples/linux.zig",
-        },
+        .root_source_file = b.path("examples/linux.zig"),
         .optimize = mode,
         .target = target,
     });
@@ -26,9 +24,7 @@ pub fn build(b: *std.Build) void {
 
     const main_tests = b.addTest(.{
         .name = "antiphony",
-        .root_source_file = .{
-            .path = "src/antiphony.zig"
-        },
+        .root_source_file = b.path("src/antiphony.zig"),
         .target = target,
         .optimize = mode,
     });
